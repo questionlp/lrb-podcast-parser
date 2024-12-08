@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Little Red Bandwagon: Podcast Episodes</title>
+    <style>
+        html { margin: 0 1em 1em 1em; }
+        table { table-layout: fixed; width: auto; border-collapse: collapse; border: 1px solid black; margin: 2em 0; }
+        th, td { border: 1px solid black; padding: 1em; }
+        td { vertical-align: top; }
+        td p { margin-top: 0; }
+        td p:last-of-type { margin-top: initial; margin-bottom: 0; }
+    </style>
+</head>
+
+<body>
+<h1>Little Red Bandwagon: Podcast Episodes</h1>
+
+<p>Table of <q>Little Red Bandwagon</q> episodes, including published date, description, and length.</p>
+
+<p>Source of data comes from: <a href="https://feeds.transistor.fm/lrb">https://feeds.transistor.fm/lrb</a>.
+
+{% if episodes %}
+<table>
+<thead>
+    <tr>
+        <th scope="col" style="width: auto">Episode</th>
+        <th scope="col" style="width: 8em;">Published</th>
+        <th scope="col" style="width: auto;">Description</th>
+        <th scope="col" style="width: 5em;">Length</th>
+    </tr>
+</thead>
+<tbody>
+{% for episode in episodes %}
+    <tr>
+        <td>
+            <p>{{ episode.title }}</p>
+            <p><a href="{{ episode.enclosure_url }}">Original Episode Download</a></p>
+        </td>
+        <td>{{ episode.published_date }}</td>
+        <td>{{ episode.description | parse_markdown | safe }}</td>
+        <td>{{ episode.total_time }}</td>
+    </tr>
+{% endfor %}
+</tbody>
+<tfoot>
+    <tr>
+        <th scope="col">Episode</th>
+        <th scope="col">Published</th>
+        <th scope="col">Description</th>
+        <th scope="col">Length</th>
+    </tr>
+</tfoot>
+</table>
+{% endif %}
+
+<p>Page generated at: {{ generate_date_time_stamp }}</p>
+
+</body>
+</html>
