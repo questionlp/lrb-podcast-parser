@@ -1,5 +1,6 @@
 # Ignore output file path
-output/
+output/*
+!output/README.md
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
